@@ -1,0 +1,13 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Fabian Reyes",
+  "classifications": [ "Web", "API", "FastEndpoints" ,"MinimalApi"],
+  "identity": "Back_Net.Template",
+  "name": "Back_Net Template",
+  "shortName": "backnet",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "ProyectTemplate"
+}
