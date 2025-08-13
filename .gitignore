@@ -1,0 +1,56 @@
+### General ###
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.nupkg
+*.DS_Store
+*.swp
+Thumbs.db
+
+### Visual Studio ###
+.vs/
+.vscode/
+*.swagger
+*.vspscc
+*.vssscc
+_ReSharper.*
+*.sln.iml
+
+### Build ###
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+*.cache
+*.exe
+*.dll
+*.pdb
+*.xml
+
+### NuGet ###
+[Nn]u[Gg]et/
+*.nupkg
+packages/
+.nuget/
+
+### Logs ###
+*.log
+*.log.*
+logs/
+
+### Configuraciones locales ###
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+*.config
+
+### Entity Framework Core (migrations) ###
+# **/Migrations/
+
+### Otros ###
+*.bak
+*.tmp
+*.~*
+*~
