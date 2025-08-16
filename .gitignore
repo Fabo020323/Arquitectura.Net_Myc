@@ -42,7 +42,7 @@ logs/
 
 ### Configuraciones locales ###
 appsettings.Development.json
-appsettings.Local.json
+appsettings.json
 secrets.json
 *.config
 
