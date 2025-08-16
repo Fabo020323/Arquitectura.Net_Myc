@@ -10,9 +10,6 @@ using Minio;
 using ProyectTemplate.Services.MinioService;
 using ProyectTemplate.Utils.Options;
 
-using ProyectTemplate.Services.MinioService;
-using ProyectTemplate.Utils.Options;
-
 using SuntravelDbContext = ProyectTemplate.Data.ProjectTemplateDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
