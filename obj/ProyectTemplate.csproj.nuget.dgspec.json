@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Cosas de Fabian\\Proyectos\\ProyectTemplate\\ProyectTemplate\\ProyectTemplate.csproj": {}
+    "/home/rc46/Escritorio/Proyects/Work/API_DotNet/Arquitectura.Net_Myc/ProyectTemplate.csproj": {}
   },
   "projects": {
-    "C:\\Cosas de Fabian\\Proyectos\\ProyectTemplate\\ProyectTemplate\\ProyectTemplate.csproj": {
+    "/home/rc46/Escritorio/Proyects/Work/API_DotNet/Arquitectura.Net_Myc/ProyectTemplate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Cosas de Fabian\\Proyectos\\ProyectTemplate\\ProyectTemplate\\ProyectTemplate.csproj",
+        "projectUniqueName": "/home/rc46/Escritorio/Proyects/Work/API_DotNet/Arquitectura.Net_Myc/ProyectTemplate.csproj",
         "projectName": "ProyectTemplate",
-        "projectPath": "C:\\Cosas de Fabian\\Proyectos\\ProyectTemplate\\ProyectTemplate\\ProyectTemplate.csproj",
-        "packagesPath": "C:\\Users\\Victus\\.nuget\\packages\\",
-        "outputPath": "C:\\Cosas de Fabian\\Proyectos\\ProyectTemplate\\ProyectTemplate\\obj\\",
+        "projectPath": "/home/rc46/Escritorio/Proyects/Work/API_DotNet/Arquitectura.Net_Myc/ProyectTemplate.csproj",
+        "packagesPath": "/home/rc46/.nuget/packages/",
+        "outputPath": "/home/rc46/Escritorio/Proyects/Work/API_DotNet/Arquitectura.Net_Myc/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Victus\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/rc46/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,8 +37,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -63,15 +55,37 @@
               "target": "Package",
               "version": "[7.0.1, )"
             },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
             "LinqKit.Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.8, )"
+              "version": "[8.*, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.*, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.*, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.19, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.19, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.8, )"
+              "version": "[8.0.19, )"
             },
             "Minio": {
               "target": "Package",
@@ -79,11 +93,11 @@
             },
             "Npgsql": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[8.*, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[9.0.4, )"
+              "version": "[8.0.8, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -109,7 +123,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.413/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

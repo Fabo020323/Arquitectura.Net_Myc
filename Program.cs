@@ -10,6 +10,11 @@ using Minio;
 using ProyectTemplate.Services.MinioService;
 using ProyectTemplate.Utils.Options;
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
+
 using SuntravelDbContext = ProyectTemplate.Data.ProjectTemplateDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,10 +29,59 @@ builder.Services.AddScoped<IBlobServices, MinioBlobServices>();
 builder.Services
     .AddAuthorization()
     .AddFastEndpoints()
-    .AddSwaggerGen(); ;
+    .AddSwaggerGen(c =>
+    {
+        // Definición del esquema Bearer
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Description = "JWT Bearer. Usa: Bearer {tu_token}",
+            Name = "Authorization",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT"
+        });
 
+        // Requisito global: habilita el botón Authorize
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    },
+                    Scheme = "bearer",
+                    Name = "Bearer",
+                    In = ParameterLocation.Header
+                },
+                Array.Empty<string>()
+            }
+        });
+    });
 
-builder.Services.AddAuthentication();
+var authSection = builder.Configuration.GetSection("Auth");
+var jwtKey     = authSection["Key"]!;
+var issuer     = authSection["Issuer"];
+var audience   = authSection["Audience"];
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(o =>
+    {
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey         = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+            ValidateIssuer           = !string.IsNullOrWhiteSpace(issuer),
+            ValidIssuer              = issuer,
+            ValidateAudience         = !string.IsNullOrWhiteSpace(audience),
+            ValidAudience            = audience,
+            ValidateLifetime         = true,
+            ClockSkew                = TimeSpan.FromMinutes(2)
+        };
+    });
 
 builder.Services.AddCors(options =>
 {
