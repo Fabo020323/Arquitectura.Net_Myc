@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 
-namespace ProyectTemplate.Endpoint
+namespace ProyectTemplate.Endpoints
 {
     public class Hello : EndpointWithoutRequest<string>
     {
