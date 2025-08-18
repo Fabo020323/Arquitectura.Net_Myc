@@ -54,12 +54,10 @@ namespace ProyectTemplate.Data
             {
                 b.ToTable("Hoteles");
                 b.HasKey(h => h.Id);
-                b.Property(h => h.Nombre).HasMaxLength(200).IsRequired();
-                b.Property(h => h.Direccion).HasMaxLength(250).IsRequired();
-                b.Property(h => h.Ciudad).HasMaxLength(120).IsRequired();
-                b.Property(h => h.Pais).HasMaxLength(120).IsRequired();
-                b.Property(h => h.Estrellas).IsRequired();
-                b.HasIndex(h => new { h.Ciudad, h.Pais });
+                b.Property(h => h.Nombre).IsRequired().HasMaxLength(200);
+                b.Property(h => h.Ubicacion).IsRequired().HasMaxLength(250);
+                b.Property(h => h.CantidadHabitaciones).IsRequired();
+                b.Property(h => h.PrecioPorNoche).HasColumnType("decimal(18,2)").IsRequired();
             });        
 
             // ---- Seed de Rol + Admin ----
