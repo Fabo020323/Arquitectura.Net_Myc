@@ -13,6 +13,7 @@ namespace ProyectTemplate.Data
         public DbSet<Usuario> Usuarios { get; set; } = default!;
         public DbSet<Rol> Roles { get; set; } = default!;
         public DbSet<Hotel> Hoteles { get; set; } = default!;
+        public DbSet<Alojamiento> Alojamientos { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,7 +49,7 @@ namespace ProyectTemplate.Data
                 .HasForeignKey(x => x.RolId)
                 .OnDelete(DeleteBehavior.Restrict);
             });
-            
+
             // ---- Config Hotel ----
             modelBuilder.Entity<Hotel>(b =>
             {
@@ -58,7 +59,18 @@ namespace ProyectTemplate.Data
                 b.Property(h => h.Ubicacion).IsRequired().HasMaxLength(250);
                 b.Property(h => h.CantidadHabitaciones).IsRequired();
                 b.Property(h => h.PrecioPorNoche).HasColumnType("decimal(18,2)").IsRequired();
-            });        
+            });
+
+            // ---- Config Alojamiento ---- 
+            modelBuilder.Entity<Alojamiento>(b =>
+            {
+                b.ToTable("Alojamientos");
+                b.HasKey(a => a.Id);
+                b.Property(a => a.Nombre).IsRequired().HasMaxLength(200);
+                b.Property(a => a.Ubicacion).IsRequired().HasMaxLength(250);
+                b.Property(a => a.CapacidadMaxima).IsRequired();
+                b.Property(a => a.PrecioPorNoche).HasColumnType("decimal(18,2)").IsRequired();
+            });
 
             // ---- Seed de Rol + Admin ----
             var adminRolId = new Guid("00000000-0000-0000-0000-000000000001");
