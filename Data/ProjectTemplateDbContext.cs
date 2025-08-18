@@ -10,8 +10,9 @@ namespace ProyectTemplate.Data
         {
         }
 
-        public DbSet<Usuario> Usuarios => Set<Usuario>();
-        public DbSet<Rol> Roles => Set<Rol>();
+        public DbSet<Usuario> Usuarios { get; set; } = default!;
+        public DbSet<Rol> Roles { get; set; } = default!;
+        public DbSet<Hotel> Hoteles { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,15 +47,28 @@ namespace ProyectTemplate.Data
                 .WithMany(r => r.Usuarios)
                 .HasForeignKey(x => x.RolId)
                 .OnDelete(DeleteBehavior.Restrict);
-            });                        
+            });
+            
+            // ---- Config Hotel ----
+            modelBuilder.Entity<Hotel>(b =>
+            {
+                b.ToTable("Hoteles");
+                b.HasKey(h => h.Id);
+                b.Property(h => h.Nombre).HasMaxLength(200).IsRequired();
+                b.Property(h => h.Direccion).HasMaxLength(250).IsRequired();
+                b.Property(h => h.Ciudad).HasMaxLength(120).IsRequired();
+                b.Property(h => h.Pais).HasMaxLength(120).IsRequired();
+                b.Property(h => h.Estrellas).IsRequired();
+                b.HasIndex(h => new { h.Ciudad, h.Pais });
+            });        
 
             // ---- Seed de Rol + Admin ----
-            var adminRolId   = new Guid("00000000-0000-0000-0000-000000000001");
-            var adminUserId  = new Guid("00000000-0000-0000-0000-0000000000AD");
+            var adminRolId = new Guid("00000000-0000-0000-0000-000000000001");
+            var adminUserId = new Guid("00000000-0000-0000-0000-0000000000AD");
             const string adminUsername = "admin";
-            const string adminEmail    = "admin@local";
-            const string adminPlain    = "BackNetAdmin123";
-            const string adminSalt     = "ZHVtbXlTdGF0aWNTYWx0MTIzNDU2"; 
+            const string adminEmail = "admin@local";
+            const string adminPlain = "BackNetAdmin123";
+            const string adminSalt = "ZHVtbXlTdGF0aWNTYWx0MTIzNDU2";
             var adminHash = Password.Hash(adminPlain, adminSalt);
 
             modelBuilder.Entity<Rol>().HasData(new Rol
@@ -73,7 +87,7 @@ namespace ProyectTemplate.Data
                 PasswordHash = adminHash,
                 RolId = adminRolId,
                 CreatedAtUtc = DateTime.SpecifyKind(new DateTime(2025, 1, 1), DateTimeKind.Utc)
-            });            
+            });
         }
     }
 }
