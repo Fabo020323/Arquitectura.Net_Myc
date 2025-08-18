@@ -39,8 +39,8 @@ public class CreateHotelEndpoint(ProjectTemplateDbContext db)
     public override void Configure()
     {
         Post("/hotels");
-        AllowAnonymous();
-        //Roles("ADMIN"); 
+        //AllowAnonymous();
+        Roles("ADMIN"); 
         Summary(s =>
         {
             s.Summary = "Crea un hotel";
