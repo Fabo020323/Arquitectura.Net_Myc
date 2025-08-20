@@ -14,6 +14,9 @@ namespace ProyectTemplate.Data
         public DbSet<Rol> Roles { get; set; } = default!;
         public DbSet<Hotel> Hoteles { get; set; } = default!;
         public DbSet<Alojamiento> Alojamientos { get; set; } = default!;
+        public DbSet<Reserva> Reservas { get; set; } = default!;
+        public DbSet<ReservaHotel> ReservasHotel { get; set; } = default!;
+        public DbSet<ReservaAlojamiento> ReservasAlojamiento { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,6 +73,58 @@ namespace ProyectTemplate.Data
                 b.Property(a => a.Ubicacion).IsRequired().HasMaxLength(250);
                 b.Property(a => a.CapacidadMaxima).IsRequired();
                 b.Property(a => a.PrecioPorNoche).HasColumnType("decimal(18,2)").IsRequired();
+            });
+
+            // ---- Config Reserva Base ----   
+            modelBuilder.Entity<Reserva>(b =>
+            {
+                b.ToTable("Reservas");               
+                b.HasKey(r => r.Id);
+
+                b.Property(r => r.Estado)
+                .IsRequired()
+                .HasMaxLength(20); 
+
+                b.Property(r => r.FechaInicio).IsRequired();
+                b.Property(r => r.FechaFin).IsRequired();
+
+                b.HasOne(r => r.Usuario)
+                .WithMany() 
+                .HasForeignKey(r => r.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                // Índices útiles para filtros
+                b.HasIndex(r => r.UsuarioId);
+                b.HasIndex(r => r.Estado);
+                b.HasIndex(r => new { r.FechaInicio, r.FechaFin });
+            });
+
+            // ---- Config ReservaHotel ----
+            modelBuilder.Entity<ReservaHotel>(b =>
+            {
+                b.ToTable("ReservasHotel");         
+                b.Property(rh => rh.CantidadHabitaciones).IsRequired();
+
+                b.HasOne(rh => rh.Hotel)
+                .WithMany()
+                .HasForeignKey(rh => rh.HotelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasIndex(rh => rh.HotelId);
+            });
+
+            // ---- Config ReservaAlojamiento ----
+            modelBuilder.Entity<ReservaAlojamiento>(b =>
+            {
+                b.ToTable("ReservasAlojamiento");    
+                b.Property(ra => ra.CantidadPersonas).IsRequired();
+
+                b.HasOne(ra => ra.Alojamiento)
+                .WithMany()
+                .HasForeignKey(ra => ra.AlojamientoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasIndex(ra => ra.AlojamientoId);
             });
 
             // ---- Seed de Rol + Admin ----
